@@ -48,19 +48,31 @@ table {
 }
 
 /* Main stiles */
+* {
+    box-sizing: border-box;
+}
 body {
     font-family: 'Monserrat';
     max-width: 100%;
     max-height: 100%;
-    padding-top: 30px;
-    padding-bottom: 30px;
+}
+.mainSection {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 40em;
+    margin: 40px auto;
     background-color: #eeeeee;
 }
 .article {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: white;
+    height: 90%;
+    border-radius: 15px;
+    margin-bottom: 10px;
 }
 
 .article-title {
@@ -92,6 +104,8 @@ body {
     flex-direction: column;
     align-items: left;
     background-color: white;
+    height: 90%;
+    border-radius: 15px;
 }
 .aside-title {
     font-size: 1.2em;
@@ -112,7 +126,43 @@ body {
     display: none;
 }
 
+/* Step 2 rules */
+.button-start {
+    width: 50%;
+    color: aliceblue;
+    background-color: black;
+    border: none;
+    border-radius: 15px;
+    height: 25px;
+}
+.step2 {
+    text-align: center;
+    width: 100%;
+}
+
 /* Media queries rules */
 @media screen and (min-width: 700px){
-    
+    .mainSection {
+        flex-direction: row;
+        align-items: center;
+        height: 20em
+    }
+    .article {
+        width: 55%;
+        margin-right: 5%;
+        margin-left: 5%;
+        box-shadow: 2px 6px rgb(206, 204, 204);
+    }
+    .aside {
+        width: 25%;
+        margin-left: 5%;
+        margin-right: 5%;
+        box-shadow: 2px 6px rgb(206, 204, 204);
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .mainSection {
+        max-width: 900px;
+    }
 }
