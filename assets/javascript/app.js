@@ -9,6 +9,8 @@ var user = {
     score: 0
 }
 
+var secondTimer = 0;
+var numberClicked = 0;
 
 firstButton.addEventListener("click", function() {
     if (userUsername.value !== "") {
@@ -22,7 +24,26 @@ firstButton.addEventListener("click", function() {
         asideScoresUser1.textContent = user.name;
         var buttonToStep3 = document.getElementById("button-start");
         buttonToStep3.addEventListener("click", function() {
+            mainPage.innerHTML = "";
+            mainPage.innerHTML = `<button class="click-here">Click here</button>`
+            setInterval(timer, 1000);
 
+            var clickHere = document.querySelector(".click-here");
+            clickHere.addEventListener("click", function() {
+                numberClicked ++;
+            })
+
+            if (secondTimer === 10) {
+                clearInterval(timer);
+                user.score = numberClicked;
+                userAndScore.push(user);
+                mainPage.innerHTML = "";
+                mainPage.innerHTML = ``;
+            }
         })
     }
 })
+
+function timer () {
+    secondTimer ++;
+}
