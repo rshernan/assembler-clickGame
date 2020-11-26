@@ -214,3 +214,9 @@ body {
         max-width: 900px;
     }
 }
+
+@media screen and (min-height: 760px) {
+    .mainSection {
+        max-height: 684px;
+    }
+}
