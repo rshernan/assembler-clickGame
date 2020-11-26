@@ -1,0 +1,52 @@
+
+body {
+    font-family: 'Monserrat', sans-serif;
+    max-width: 100%;
+    max-height: 100%;
+    border: 1px solid rebeccapurple;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#mainPage {
+    margin: 0 auto;
+    border: 2px solid yellow;
+}
+#mainSection {
+    background-color: lightblue;
+    border: 20px;
+    margin: 0 auto;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+#usernameBtn {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    margin-bottom: 20px;
+}
+
+.inputUsername {
+    width: 50%;
+}
+
+.button {
+    margin-top: 20px;
+    background-color: black;
+    color:white;
+    width: 50%;
+    border: none;
+    border-radius: 15px;
+    height: 25px;
+}
