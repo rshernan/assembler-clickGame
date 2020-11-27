@@ -59,7 +59,7 @@ body, html {
     height: 100%;
 }
 body {
-    font-family: 'Monserrat';
+    font-family: 'Montserrat';
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,7 +108,6 @@ body {
     border: none;
     border-radius: 15px;
     height: 25px;
-    
 }
 .aside {
     height: max-content;
@@ -213,5 +212,11 @@ body {
 @media screen and (min-width: 1000px) {
     .mainSection {
         max-width: 900px;
+    }
+}
+
+@media screen and (min-height: 760px) {
+    .mainSection {
+        max-height: 684px;
     }
 }
