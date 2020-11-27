@@ -13,9 +13,8 @@ var firstTime= true;
 const flexPosition=["flex-start","flex-end","center","center","flex-start","flex-end","flex-end","center","flex-start"]
 
 
-firstButton.addEventListener("click", game)
-
 function game() {
+
     if (userUsername.value !== "") {
         let hiden = document.querySelectorAll(".aside-scores--noOne_hidde");
         hiden[0].classList.toggle("aside-scores--noOne_hidde")
@@ -34,33 +33,46 @@ function game() {
         mainPage.innerHTML = "";
         mainPage.innerHTML =`
         <section class="step2">
-        <button class="button-start" id="button-start">Start Game!</button>
+        <button class="button-start" id="easy" style="margin-bottom: 15px">Easy</button>
+        <button class="button-start" id="hard">Hard</button>
         </section>`
         asideScoresUser1.textContent = user.name;
-        var buttonToStep3 = document.getElementById("button-start");
+        var buttonToStep3 = document.getElementById("easy");
         buttonToStep3.addEventListener("click", function() {
-            mainPage.style.display="inherit"
+            readygame(false);
+        })
+        var buttonToStepHard3 = document.getElementById("hard");
+        buttonToStepHard3.addEventListener("click", function() {
+            readygame(true);
+        })
+    }
+}
+
+function readygame(hardMode){
+    mainPage.style.display="inherit"
             mainPage.innerHTML = "";
             mainPage.innerHTML = `<button class="click-here">Click here</button>`
             var clickHere = document.querySelector(".click-here");
-            document.querySelector(".click-here").classList.toggle("click-here-advanced")
-            document.querySelector(".click-here").classList.toggle("click-here")
+            if(hardMode){
+                document.querySelector(".click-here").classList.toggle("click-here-advanced")
+                document.querySelector(".click-here").classList.toggle("click-here")
+            }
             interval=setInterval(timer, 1000);
             clickHere.addEventListener("click", function() {
                 numberClicked ++;
-                let randomHeight=getRandomArbitrary(5, 30, false)
-                let randomWidth=getRandomArbitrary(5, 30, false)
-                let randomJustify=getRandomArbitrary(0, 9, true)
-                let randomAlign=getRandomArbitrary(0, 9, true)
-
-                console.log(`justify:${randomJustify}, align:${randomAlign}`)
-                root.style.setProperty("--width-button", randomWidth+"%");
-                root.style.setProperty("--height-button", randomHeight+"%");
-                root.style.setProperty("--align-button", flexPosition[randomJustify]);
-                root.style.setProperty("--justify-button", flexPosition[randomAlign]);
+                if(hardMode){
+                    let randomHeight=getRandomArbitrary(5, 30, false)
+                    let randomWidth=getRandomArbitrary(5, 30, false)
+                    let randomJustify=getRandomArbitrary(0, 9, true)
+                    let randomAlign=getRandomArbitrary(0, 9, true)
+                    
+                    root.style.setProperty("--width-button", randomWidth+"%");
+                    root.style.setProperty("--height-button", randomHeight+"%");
+                    root.style.setProperty("--align-button", flexPosition[randomJustify]);
+                    root.style.setProperty("--justify-button", flexPosition[randomAlign]);
+                    root.style.setProperty("--text-button", randomWidth+"px");
+                }
             })
-        })
-    }
 }
 
 
@@ -74,13 +86,13 @@ function timer () {
         user.score = numberClicked;
         userAndScore.push(user);
         mainPage.innerHTML = "";
-        mainPage.innerHTML = `<h2 class="finishPage__title">Your score</h2>
-        <p class="finishPage__seconds">Your 10 seconds are done</p>
-        <p class="finishPage__clicks">You have made ${user.score} clicks</p>
-        <button class="finishPage__button">Play Again</button>`;
+        mainPage.innerHTML = `<h2 class="finishPage__title" style="margin:10px">Your score</h2>
+        <p class="finishPage__seconds" style="margin:10px">Your 10 seconds are done</p>
+        <p class="finishPage__clicks" style="margin:10px">You have made ${user.score} clicks</p>
+        <button class="button" id="restart" style="margin:10px">Play Again</button>`;
         document.querySelector("#aside-scores--score1").innerHTML=`${user.score} cliks`
 
-        var buttonToStep4 = document.querySelector(".finishPage__button");
+        var buttonToStep4 = document.querySelector("#restart");
         buttonToStep4.addEventListener("click", function() {
             mainPage.innerHTML=`<h1 class="article-title">Choose a username</h1>
             <label for="username" class="username" >Username</label>
