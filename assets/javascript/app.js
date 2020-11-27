@@ -1,6 +1,7 @@
 const mainPage = document.getElementById("mainPage");
 let firstButton = document.getElementById("start-button").addEventListener("click", game )
 let userUsername = document.getElementById("username");
+const root = document.documentElement;
 
 var userAndScore = [];
 var user;
@@ -8,6 +9,9 @@ var interval;
 var secondTimer = 0;
 var numberClicked = 0;
 var firstTime= true;
+
+const flexPosition=["flex-start","flex-end","center","center","flex-start","flex-end","flex-end","center","flex-start"]
+
 
 firstButton.addEventListener("click", game)
 
@@ -35,12 +39,25 @@ function game() {
         asideScoresUser1.textContent = user.name;
         var buttonToStep3 = document.getElementById("button-start");
         buttonToStep3.addEventListener("click", function() {
+            mainPage.style.display="inherit"
             mainPage.innerHTML = "";
             mainPage.innerHTML = `<button class="click-here">Click here</button>`
-            interval=setInterval(timer, 1000);
             var clickHere = document.querySelector(".click-here");
+            document.querySelector(".click-here").classList.toggle("click-here-advanced")
+            document.querySelector(".click-here").classList.toggle("click-here")
+            interval=setInterval(timer, 1000);
             clickHere.addEventListener("click", function() {
                 numberClicked ++;
+                let randomHeight=getRandomArbitrary(5, 30, false)
+                let randomWidth=getRandomArbitrary(5, 30, false)
+                let randomJustify=getRandomArbitrary(0, 9, true)
+                let randomAlign=getRandomArbitrary(0, 9, true)
+
+                console.log(`justify:${randomJustify}, align:${randomAlign}`)
+                root.style.setProperty("--width-button", randomWidth+"%");
+                root.style.setProperty("--height-button", randomHeight+"%");
+                root.style.setProperty("--align-button", flexPosition[randomJustify]);
+                root.style.setProperty("--justify-button", flexPosition[randomAlign]);
             })
         })
     }
@@ -51,6 +68,8 @@ function timer () {
     secondTimer ++;
     console.log(secondTimer);
     if (secondTimer >= 10) {
+        root.style.setProperty("--align-button", "center");
+        root.style.setProperty("--justify-button", "center");
         clearInterval(interval);
         user.score = numberClicked;
         userAndScore.push(user);
@@ -59,6 +78,7 @@ function timer () {
         <p class="finishPage__seconds">Your 10 seconds are done</p>
         <p class="finishPage__clicks">You have made ${user.score} clicks</p>
         <button class="finishPage__button">Play Again</button>`;
+        document.querySelector("#aside-scores--score1").innerHTML=`${user.score} cliks`
 
         var buttonToStep4 = document.querySelector(".finishPage__button");
         buttonToStep4.addEventListener("click", function() {
@@ -107,5 +127,14 @@ function timer () {
             userUsername = document.getElementById("username");
         })
     }
+}
+
+function getRandomArbitrary(min, max, floor) {
+    if(floor){
+        return Math.floor(Math.random() * (max - min) + min);
+    }else{
+        return Math.random() * (max - min) + min;
+    }
+    
 }
 
